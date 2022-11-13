@@ -23,7 +23,7 @@ jobs:
           path: profile
           
       - name: Copy profile/README.md to ours/index.md
-        run: cp profile/README.md to ours/index.md
+        run: cp profile/README.md ours/index.md
       
       - name: Add updated ours/index.md to index, commit and push
         run: |
