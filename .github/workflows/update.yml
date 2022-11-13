@@ -1,0 +1,35 @@
+name: Update from GitHub profile
+
+on:
+  workflow_call:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout own repository
+        uses: actions/checkout@v3
+        with:
+          path: ours
+          
+      - name: Checkout profile repository
+        uses: actions/checkout@v3
+        with:
+          repository: chilippso/chilippso
+          path: profile
+          
+      - name: Copy profile/README.md to ours/index.md
+        run: cp profile/README.md to ours/index.md
+      
+      - name: Add updated ours/index.md to index, commit and push
+        run: |
+          cd ours
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update from GitHub profile"
+          git push
